@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Achievements | The Tortured Poets Department</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Playfair+Display&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --header-bg: #4a3c3c;
+    --body-bg: #f5f0e6;
+    --nav-bg: #3d2f2f;
+    --nav-link: #f0e6d2;
+    --nav-link-hover: #b39a76;
+    --content-bg: #fcf9f3;
+    --accent: #6b4c3b;
+    --box-bg: #fff8f0;
+    --box-shadow: rgba(107, 76, 59, 0.3);
+    --footer-bg: #3d2f2f;
+    --font-serif: 'Libre Baskerville', serif;
+    --font-title: 'Playfair Display', serif;
+  }
+  body {
+    margin: 0;
+    background-color: var(--body-bg);
+    font-family: var(--font-serif);
+    color: var(--accent);
+    min-height: 100vh;
+  }
+  header {
+    background-color: var(--header-bg);
+    color: var(--nav-link);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 4px 20px var(--box-shadow);
+    font-family: var(--font-title);
+  }
+  header h1 {
+    font-size: 2.8rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #a68a72;
+  }
+  nav {
+    background-color: var(--nav-bg);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  nav a {
+    color: var(--nav-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 6px var(--box-shadow);
+    background: transparent;
+  }
+  nav a:hover,
+  nav a:focus {
+    background-color: var(--nav-link-hover);
+    color: var(--header-bg);
+    box-shadow: 0 0 15px 4px #b39a76aa;
+    outline: none;
+  }
+  nav a.active {
+    border: 2.5px solid #c9c2b6;
+    box-shadow: 0 0 16px 3px #c9c2b6cc;
+    font-weight: 900;
+  }
+  main {
+    max-width: 700px;
+    margin: 2rem auto 4rem;
+    background-color: var(--content-bg);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    box-shadow: 0 6px 24px var(--box-shadow);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--accent);
+    text-align: center;
+  }
+  main h2 {
+    font-family: var(--font-title);
+    font-size: 2.4rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    color: var(--header-bg);
+  }
+  .achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .achievement-box {
+    background-color: var(--box-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 0 12px 3px #b39a7699;
+    font-family: var(--font-serif);
+    color: #5a4a3a;
+    cursor: pointer;
+    max-width: 480px;
+    width: 100%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+  .achievement-box:hover,
+  .achievement-box:focus {
+    box-shadow: 0 0 20px 6px var(--accent);
+    transform: translateY(-6px);
+    outline: none;
+  }
+  .achievement-title {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: var(--header-bg);
+  }
+  .achievement-year {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  /* Popup styles */
+  .popup-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(74, 60, 60, 0.75);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .popup-bg.active {
+    display: flex;
+  }
+  .popup-content {
+    background: var(--box-bg);
+    color: var(--header-bg);
+    border-radius: 18px;
+    padding: 2rem 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 40px 8px #b39a7699;
+    position: relative;
+    font-family: var(--font-serif);
+    text-align: left;
+  }
+  .popup-content h3 {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--header-bg);
+  }
+  .popup-content p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #5a4a3a;
+  }
+  .popup-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 2.5rem;
+    color: var(--header-bg);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-title);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .popup-close:hover {
+    opacity: 1;
+  }
+  @media (max-width: 700px) {
+    main {
+      padding: 1.5rem 1rem 3rem;
+    }
+    .popup-content {
+      padding: 1.5rem 2rem;
+    }
+  }
+  footer.disclaimer {
+    background-color: var(--footer-bg);
+    color: var(--nav-link);
+    text-align: center;
+    padding: 1.2rem 1rem 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 3rem;
+    font-family: var(--font-serif);
+  }
+  footer.disclaimer a {
+    color: var(--nav-link-hover);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1> ACHIEVEMENTS </h1>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="interests.html">My Interests</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="education.html">Education</a>
+  <a href="achievements.html" class="active">Achievements</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<main>
+  <h2>My Achievements</h2>
+  <div class="achievement-list">
+  Click to read the.
+    <div tabindex="0" class="achievement-box" data-title="Exchange Student" data-desc="Represented UiTM in the ASEAN Cultural Exchange program and was a leader of this program. This program helps fostering cultural understanding and leadership skills, relate to it origins purpose, this program is called Student and Culture Exchange "Se-NUSANTARA". It was held in Universitas Airlangga, Surabaya, Indonesia (2025). This program helps me lots gaining my confidentility, my public speaking language, body language, communications skill and others. This help me as well in creating a strong bonding in friendship either in or out Malaysia. ">
+      <div class="achievement-title">"Se-NUSANTARA"</div>
+      <div class="achievement-year">2025</div>
+      <div>Here To Analysis</div>
+    </div>
+    <div tabindex="0" class="achievement-box" data-title="Position" data-desc="Led the ACSA UiTM Kedah ASEAN Community Student Association(ACSA) as president and was an exco Protokol for this club,- Next, Exco protokol for Peers Club in semester 3(2024), - Exco protokol for KSWK in semester 3 until now, - As leader of Se-NUSANTARA exchange student program In 2025.">
+      <div class="achievement-title">Position</div>
+      <div class="achievement-year">2024 - 2025</div>
+      <div>Here To Analysis</div>
+    </div>
+    <div tabindex="0" class="achievement-box" data-title="Involvement" data-desc="
+Involved with many program either inside or outside UiTM, such as:
+- ASEAN DATA SCIENCE EXPLORERS organized by AYO
+- Help cleaning the beach with the beach cleanup Kedah
+- Involved as athlete for bowling in Sukan Antara Fakulti(2024)
+- As an emcee for Peers Club in their 2 program, 
+- As an emcee for Kelab Sejarah dan Warisan Kedah in Anual General Meeting, 
+- volunteered as biro special tasks for Merbok Book Festival">
+      <div class="achievement-title">Involvement</div>
+      <div class="achievement-year">2024 - 2025</div>
+      <div>Here To Analysis</div>
+    </div>
+    <div tabindex="0" class="achievement-box" data-title="Dean's List Award" data-desc="Achieved academic excellence and was honored on the Dean's List at UiTM Kedah on semester 3, eventhough i was busying with all the extracurricullar but i still manage to get dean, ALHAMDULILLAH. (2025)">
+      <div class="achievement-title">Dean's List Award</div>
+      <div class="achievement-year">2025</div>
+      <div>Here To Analysis</div>
+    </div>
+  </div>
+</main>
+<div class="popup-bg" id="popup-bg" role="dialog" aria-modal="true" aria-labelledby="popup-title" tabindex="-1">
+  <div class="popup-content">
+    <button class="popup-close" id="popup-close" aria-label="Close popup">&times;</button>
+    <h3 id="popup-title"></h3>
+    <p id="popup-desc"></p>
+  </div>
+</div>
+<footer class="disclaimer">
+  &copy; 2025 Arif Hakim. All rights reserved.<br />
+ </footer>
+<script>
+  const popupBg = document.getElementById('popup-bg');
+  const popupTitle = document.getElementById('popup-title');
+  const popupDesc = document.getElementById('popup-desc');
+  const popupClose = document.getElementById('popup-close');
+
+  document.querySelectorAll('.achievement-box').forEach(box => {
+    box.addEventListener('click', () => {
+      popupTitle.textContent = box.dataset.title;
+      popupDesc.textContent = box.dataset.desc;
+      popupBg.classList.add('active');
+      popupClose.focus();
+    });
+    box.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        box.click();
+      }
+    });
+  });
+
+  popupClose.addEventListener('click', () => {
+    popupBg.classList.remove('active');
+  });
+
+  popupBg.addEventListener('click', e => {
+    if (e.target === popupBg) {
+      popupBg.classList.remove('active');
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && popupBg.classList.contains('active')) {
+      popupBg.classList.remove('active');
+    }
+  });
+</script>
+</body>
+</html>

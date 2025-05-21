@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home | The Tortured Poets Department</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Merriweather&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #eaeaea;
+    --accent-color: #c9c2b6;
+    --shadow-color: rgba(201, 194, 182, 0.3);
+    --font-mono: 'Special Elite', monospace;
+    --font-serif: 'Merriweather', serif;
+  }
+  body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-serif);
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image: url('office-background.jpg'); /* Add a Victorian office background image */
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+  }
+  header {
+    background: rgba(26, 26, 26, 0.85);
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    text-shadow: 1px 1px 5px #000;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+  }
+  nav {
+    background: rgba(26, 26, 26, 0.85);
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    border-radius: 0 0 12px 12px;
+  }
+  nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.7em 1.3em;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    display: inline-block;
+    user-select: none;
+    font-family: var(--font-serif);
+    border: 2px solid rgba(255,255,255,0.12);
+    margin: 0 0.1em;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+  }
+  /* Distinct color boxes for each menu item */
+  .menu-home         { background: #444; color: #fff; }
+  .menu-about        { background: #666; color: #fff; }
+  .menu-interests    { background: #888; color: #fff; }
+  .menu-gallery      { background: #aaa; color: #222; }
+  .menu-education    { background: #ccc; color: #222; }
+  .menu-achievements { background: #e0e0e0; color: #222; }
+  .menu-contact      { background: #f7f7f7; color: #222; }
+  /* On hover/focus, invert the box */
+  nav a:hover, nav a:focus {
+    background: #fff;
+    color: #222 !important;
+    border-color: #c9c2b6;
+    outline: none;
+  }
+  /* Highlight the active page */
+  nav a.active {
+    border: 2.5px solid #c9c2b6;
+    box-shadow: 0 0 16px 3px #c9c2b6cc;
+    font-weight: 900;
+  }
+  main {
+    max-width: 700px;
+    margin: 3rem auto 5rem;
+    background: rgba(40, 40, 40, 0.9);
+    border-radius: 16px;
+    padding: 3rem 3rem 4rem;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    color: var(--accent-color);
+    position: relative;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  main h2 {
+    font-family: var(--font-mono);
+    font-size: 2.6rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+  }
+  button#magic-btn {
+    margin-top: 2.5rem;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 25px;
+    padding: 0.8em 2em;
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px #c9c2b6cc;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  button#magic-btn:hover {
+    background-color: var(--bg-color);
+    color: var(--accent-color);
+    box-shadow: 0 6px 30px #eaeaeacc;
+  }
+  .wand {
+    font-size: 2rem;
+  }
+  /* Popup paper style */
+  #popup-bg {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  #popup-bg.active {
+    display: flex;
+  }
+  #popup-paper {
+    background: #fefcf7;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 0 50px 12px #bfbfbf;
+    max-width: 600px;
+    font-family: var(--font-serif);
+    color: #3a3a3a;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    position: relative;
+  }
+  #close-popup {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2.5rem;
+    color: #555;
+    cursor: pointer;
+    background: none;
+    border: none;
+    user-select: none;
+  }
+  /* Tornado paper effect */
+  .tornado-paper {
+    position: fixed;
+    width: 22px;
+    height: 30px;
+    background: linear-gradient(135deg, #fefcf7 0%, #dcd7ca 100%);
+    border-radius: 5px;
+    box-shadow: 0 0 12px 3px #c9c4bbaa;
+    opacity: 0.85;
+    animation: tornado-float 3s linear infinite;
+    pointer-events: none;
+    z-index: 1500;
+  }
+  @keyframes tornado-float {
+    0% {transform: translate(0,0) rotate(0deg);}
+    25% {transform: translate(20px,-40px) rotate(15deg);}
+    50% {transform: translate(-15px,-80px) rotate(-15deg);}
+    75% {transform: translate(10px,-40px) rotate(10deg);}
+    100% {transform: translate(0,0) rotate(0deg);}
+  }
+  /* Paper floating effect */
+  .floating-paper {
+    position: fixed;
+    pointer-events: none;
+    width: 14px;
+    height: 20px;
+    background: linear-gradient(135deg, #f9f6f0 0%, #d7cbbd 100%);
+    border-radius: 3px;
+    box-shadow: 0 0 8px 2px #c9b89a88;
+    opacity: 0.9;
+    animation: float-up 2s forwards;
+    transform-origin: center;
+    z-index: 9999;
+  }
+  @keyframes float-up {
+    0% {
+      opacity: 0.9;
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-120px) rotate(15deg);
+    }
+  }
+  footer.disclaimer {
+    background-color: #222;
+    color: #eaeaea;
+    text-align: center;
+    padding: 1.2rem 1rem 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 4rem;
+    font-family: var(--font-serif);
+  }
+  footer.disclaimer a {
+    color: #c9c2b6;
+    text-decoration: underline;
+  }
+  @media (max-width: 700px) {
+    main {
+      padding: 2rem 1.5rem 3rem;
+      font-size: 1rem;
+    }
+    header {
+      font-size: 2rem;
+    }
+    nav a {
+      font-size: 1rem;
+      padding: 0.4em 1em;
+    }
+    button#magic-btn {
+      font-size: 1.1rem;
+      padding: 0.6em 1.2em;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  The Tortured Poets Department
+  <p>Arif Hakim | UiTM Kedah</p>
+</header>
+<nav>
+  <a href="index.html" class="menu-home active">Home</a>
+  <a href="about.html" class="menu-about">About Me</a>
+  <a href="interests.html" class="menu-interests">My Interests</a>
+  <a href="gallery.html" class="menu-gallery">Gallery</a>
+  <a href="education.html" class="menu-education">Education</a>
+  <a href="achievements.html" class="menu-achievements">Achievements</a>
+  <a href="contact.html" class="menu-contact">Contact</a>
+</nav>
+<main>
+  <h2>Welcome to the Official Departments of Arif Hakim</h2>
+  <p>“I've been dancing with the devils in my head... and studying for midterms.”
+
+Welcome to a space where silence speaks loudest,
+where heartbreak, ambition, and midnight thoughts are inked into digital verses.
+
+This is not just a website.
+It’s a collection of fragments  @ Arif Hakim,
+a writer of reports, a poet of assignments,
+and just another tortured soul... submitting on the deadline.</p><br>
+<span> *Double Click to Read.<br>
+
+  <button id="magic-btn" aria-label="Cast magic spell">
+    Magic <span class="wand">🪄</span>
+  </button>
+
+</main>
+<div id="popup-bg" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1">
+  <div id="popup-paper">
+    
+    <button id="close-popup" aria-label="Close popup">&times;</button>
+    <h3>Poetic Manuscript</h3>
+    <p> It’s where a broken boy builds beauty out of burnout —<br>
+  where <strong>Arif Hakim</strong> turns pain into paragraphs,<br>
+  and GPA pressure into poetry.</p></p>
+  </div>
+</div>
+
+<footer class="disclaimer">
+  &copy; 2025 Arif Hakim. All rights reserved.<br />
+   </footer>
+
+<script>
+  // Tornado paper effect
+  function createTornadoPaper() {
+    const paper = document.createElement('div');
+    paper.className = 'tornado-paper';
+    paper.style.left = `${Math.random() * window.innerWidth}px`;
+    paper.style.top = `${window.innerHeight + 30}px`;
+    paper.style.animationDuration = `${3 + Math.random() * 2}s`;
+    paper.style.animationDelay = `${Math.random() * 5}s`;
+    document.body.appendChild(paper);
+    setTimeout(() => paper.remove(), 7000);
+  }
+  for(let i=0; i<12; i++) {
+    setTimeout(createTornadoPaper, i * 500);
+  }
+
+  // Magic button paper floating effect
+  document.getElementById('magic-btn').addEventListener('click', e => {
+    const rect = e.target.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    for (let i = 0; i < 10; i++) {
+      const paper = document.createElement('div');
+      paper.className = 'floating-paper';
+      paper.style.left = `${centerX + (Math.random() - 0.5) * 40}px`;
+      paper.style.top = `${centerY + (Math.random() - 0.5) * 20 + window.scrollY}px`;
+      paper.style.animationDelay = `${i * 0.1}s`;
+      document.body.appendChild(paper);
+      setTimeout(() => paper.remove(), 2200);
+    }
+  });
+
+  // Popup logic
+  const popupBg = document.getElementById('popup-bg');
+  const popupPaper = document.getElementById('popup-paper');
+  const closePopup = document.getElementById('close-popup');
+
+  popupPaper.style.display = 'none'; // Initially hidden
+
+  // Show popup on main double-click
+  document.querySelector('main').addEventListener('dblclick', () => {
+    popupBg.style.display = 'flex';
+    popupBg.setAttribute('aria-hidden', 'false');
+    popupPaper.style.display = 'block';
+    closePopup.focus();
+  });
+
+  closePopup.addEventListener('click', () => {
+    popupBg.style.display = 'none';
+    popupBg.setAttribute('aria-hidden', 'true');
+    popupPaper.style.display = 'none';
+  });
+
+  popupBg.addEventListener('click', e => {
+    if (e.target === popupBg) {
+      popupBg.style.display = 'none';
+      popupBg.setAttribute('aria-hidden', 'true');
+      popupPaper.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>

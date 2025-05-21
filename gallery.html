@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Gallery | Arif Hakim</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Merriweather&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f9f6f0;
+    --text: #1a1a1a;
+    --accent: #444444;
+    --shadow: rgba(68, 68, 68, 0.2);
+    --font-mono: 'Special Elite', monospace;
+    --font-serif: 'Merriweather', serif;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    min-height: 100vh;
+  }
+  header {
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    user-select: none;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+  }
+  nav {
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+  nav a {
+    color: var(--bg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+  nav a:hover, nav a:focus {
+    background-color: #b2a98f;
+    color: var(--accent);
+    outline: none;
+  }
+  main {
+    max-width: 700px;
+    margin: 2rem auto 4rem;
+    background: #fff8f0;
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    box-shadow: 0 6px 24px var(--shadow);
+    text-align: center;
+    color: var(--accent);
+  }
+  main h2 {
+    font-family: var(--font-mono);
+    font-size: 2.4rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+  .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+  .gallery-item {
+    position: relative;
+    width: 220px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(20%) contrast(90%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  .gallery-item:hover img {
+    filter: grayscale(0%) contrast(110%);
+    transform: scale(1.05);
+  }
+  /* Typewriter text overlay container */
+  .typewriter-text {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    background-color: rgba(0,0,0,0.5);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid var(--bg);
+    width: 0;
+    animation: typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--bg) }
+  }
+  /* Popup styles */
+  #popup-bg {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.8);
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  #popup-bg.active {
+    display: flex;
+  }
+  #popup-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 18px;
+    box-shadow: 0 0 40px 8px #b39a7699;
+    background: #fff;
+  }
+  #close-popup {
+    position: absolute;
+    top: 5vh;
+    right: 5vw;
+    font-size: 2.5rem;
+    color: #b39a7699;
+    cursor: pointer;
+    z-index: 3001;
+    user-select: none;
+  }
+  footer.disclaimer {
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: 1.2rem 1rem 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 3rem;
+    font-family: var(--font-serif);
+  }
+  footer.disclaimer a {
+    color: #d9cbbd;
+    text-decoration: underline;
+  }
+  @media (max-width: 700px) {
+    main {
+      padding: 1.5rem 1rem 3rem;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    nav a {
+      font-size: 1rem;
+      padding: 0.4em 1em;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  Gallery 
+ </header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="interests.html">My Interests</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="education.html">Education</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="contact.html">Contact</a>
+</nav>
+<main>
+  <h2>Myself.</h2>
+  <div class="gallery-container">
+    <div class="gallery-item" tabindex="0" aria-label="Myself.">
+      <img src="6.jpg" alt="Myself" />
+      <div class="typewriter-text">KLIA 2.</div>
+    </div>
+    <div class="gallery-item" tabindex="0" aria-label="My memories">
+      <img src="9.jpg" alt="Myself" />
+      <div class="typewriter-text">UiTM Kedah</div>
+    </div>
+  </div>
+</main>
+
+
+<div id="popup-bg" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1">
+  <span id="close-popup" aria-label="Close popup">&times;</span>
+  <img id="popup-img" src="" alt="Popup Image" />
+</div>
+
+<main>
+  <h2>Aesthetic.</h2>
+  <div class="gallery-container">
+    <div class="gallery-item" tabindex="0" aria-label="Myself.">
+      <img src="3.jpg" alt="Myself" />
+      <div class="typewriter-text">Tanjung Dawai.</div>
+        </div>
+   <div class="gallery-container">
+      <div class="gallery-item" tabindex="0" aria-label="Myself.">
+      <img src="11.jpg" alt="Myself" />
+      <div class="typewriter-text">Alor Setar.</div>
+  </div>
+</main>
+
+
+<div id="popup-bg" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1">
+  <span id="close-popup" aria-label="Close popup">&times;</span>
+  <img id="popup-img" src="" alt="Popup Image" />
+</div>
+<main>
+  <h2>My friends.</h2>
+  <div class="gallery-container">
+    <div class="gallery-item" tabindex="0" aria-label="Myself.">
+      <img src="7.jpg" alt="Myself" />
+      <div class="typewriter-text">Indo x Malay.</div>
+    </div>
+    <div class="gallery-item" tabindex="0" aria-label="My memories">
+      <img src="10.jpg" alt="Myself" />
+      <div class="typewriter-text">Indo x Malay</div>
+    </div>
+  </div>
+</main>
+
+
+<div id="popup-bg" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1">
+  <span id="close-popup" aria-label="Close popup">&times;</span>
+  <img id="popup-img" src="" alt="Popup Image" />
+</div>
+
+
+<footer class="disclaimer">
+  &copy; 2025 Arif Hakim. All rights reserved.<br />
+  </footer>
+
+<script>
+  const popupBg = document.getElementById('popup-bg');
+  const popupImg = document.getElementById('popup-img');
+  const closeBtn = document.getElementById('close-popup');
+
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      popupImg.src = img.src;
+      popupImg.alt = img.alt;
+      popupBg.classList.add('active');
+      popupBg.setAttribute('aria-hidden', 'false');
+      closeBtn.focus();
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    popupBg.classList.remove('active');
+    popupBg.setAttribute('aria-hidden', 'true');
+  });
+
+  popupBg.addEventListener('click', e => {
+    if (e.target === popupBg) {
+      popupBg.classList.remove('active');
+      popupBg.setAttribute('aria-hidden', 'true');
+    }
+  });
+</script>
+</body>
+</html>

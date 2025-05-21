@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Education | Arif Hakim</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Playfair+Display&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --header-bg: #4a3c3c;
+    --body-bg: #f5f0e6;
+    --nav-bg: #3d2f2f;
+    --nav-link: #f0e6d2;
+    --nav-link-hover: #b39a76;
+    --content-bg: #fcf9f3;
+    --accent: #6b4c3b;
+    --box-bg: #fff8f0;
+    --box-shadow: rgba(107, 76, 59, 0.3);
+    --footer-bg: #3d2f2f;
+    --font-serif: 'Libre Baskerville', serif;
+    --font-title: 'Playfair Display', serif;
+  }
+  body {
+    margin: 0;
+    background-color: var(--body-bg);
+    font-family: var(--font-serif);
+    color: var(--accent);
+    min-height: 100vh;
+  }
+  header {
+    background-color: var(--header-bg);
+    color: var(--nav-link);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 4px 20px var(--box-shadow);
+    font-family: var(--font-title);
+  }
+  header h1 {
+    font-size: 2.8rem;
+    margin: 0 0 0.5rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #a68a72;
+  }
+  nav {
+    background-color: var(--nav-bg);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  nav a {
+    color: var(--nav-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 6px var(--box-shadow);
+    background: transparent;
+  }
+  nav a:hover,
+  nav a:focus {
+    background-color: var(--nav-link-hover);
+    color: var(--header-bg);
+    box-shadow: 0 0 15px 4px #b39a76aa;
+    outline: none;
+  }
+  nav a.active {
+    border: 2.5px solid #c9c2b6;
+    box-shadow: 0 0 16px 3px #c9c2b6cc;
+    font-weight: 900;
+  }
+  main {
+    max-width: 700px;
+    margin: 2rem auto 4rem;
+    background-color: var(--content-bg);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    box-shadow: 0 6px 24px var(--box-shadow);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--accent);
+  }
+  main h2 {
+    font-family: var(--font-title);
+    font-size: 2.4rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    text-align: center;
+    color: var(--header-bg);
+  }
+  .interest-box {
+    background-color: var(--box-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 12px 3px #b39a7699;
+    text-align: left;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .interest-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px 6px var(--accent);
+  }
+  .interest-title {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+    color: var(--header-bg);
+  }
+  .interest-desc {
+    font-family: var(--font-serif);
+    color: #5a4a3a;
+  }
+  footer.disclaimer {
+    background-color: var(--footer-bg);
+    color: var(--nav-link);
+    text-align: center;
+    padding: 1.2rem 1rem 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 3rem;
+    font-family: var(--font-serif);
+  }
+  footer.disclaimer a {
+    color: var(--nav-link-hover);
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>My Education</h1>
+   </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Me</a>
+    <a href="interests.html">My Interests</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="education.html" class="active">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h2>My Education</h2>
+    <div class="interest-box">
+      <div class="interest-title">Universiti Teknologi Mara(UiTM) Cawangan Kedah</div>
+      <div class="interest-desc">
+        <b>2023 - Present (Currently on semester 4)</b><br>
+        Diploma in Library Informatics<br>
+        Kedah, Malaysia
+      </div>
+    </div>
+    <div class="interest-box">
+      <div class="interest-title">Sekolah Menengah Kebangsaan Kepala Batas</div>
+      <div class="interest-desc">
+        <b>2018 - 2022</b><br>
+        SPM <br>
+        Kedah, Malaysia
+      </div>
+    </div>
+    <div class="interest-box">
+      <div class="interest-title">Sekolah Kebangsaan Jalan Datuk Kumbar</div>
+      <div class="interest-desc">
+        <b>2014 - 2017</b><br>
+        UPSR<br>
+        Kedah, Malaysia
+      </div>
+    </div>
+  </main>
+
+  <footer class="disclaimer">
+    &copy; 2025 Arif Hakim. All rights reserved.<br />
+  </footer>
+</body>
+</html>

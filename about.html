@@ -1,0 +1,343 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Me | Arif Hakim</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Merriweather&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f9f9f9;
+    --text: #1a1a1a;
+    --accent: #444444;
+    --highlight: #e0e0e0;
+    --link-hover: #666666;
+    --font-mono: 'Special Elite', monospace;
+    --font-serif: 'Merriweather', serif;
+  }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-serif);
+    min-height: 100vh;
+  }
+  header {
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    user-select: none;
+  }
+  nav {
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem 0;
+    gap: 1rem;
+  }
+  nav a {
+    color: var(--bg);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.3em 1em;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+  nav a:hover, nav a:focus {
+    background: var(--highlight);
+    color: var(--accent);
+    outline: none;
+  }
+  main {
+    max-width: 700px;
+    margin: 3rem auto 5rem;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  main h2 {
+    font-family: var(--font-mono);
+    font-size: 2.4rem;
+    margin-top: 0;
+    text-align: center;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  main p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+  .typewriter-img {
+    display: block;
+    margin: 2rem auto 1rem;
+    max-width: 220px;
+    cursor: pointer;
+    filter: drop-shadow(2px 4px 5px #aaa);
+    transition: transform 0.3s ease;
+  }
+  .typewriter-img:hover {
+    transform: scale(1.05);
+  }
+  /* Popup paper */
+  #popup-bg {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  #popup-bg.active {
+    display: flex;
+  }
+  #popup-paper {
+    background: #fefcf7;
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 0 40px 8px #bbb;
+    max-width: 600px;
+    font-family: var(--font-serif);
+    color: var(--accent);
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  #close-popup {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2rem;
+    color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+  }
+  /* Tornado paper effect */
+  .tornado-paper {
+    position: fixed;
+    width: 20px;
+    height: 28px;
+    background: linear-gradient(135deg, #fefcf7 0%, #dcd7ca 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 10px 3px #c9c4bbaa;
+    opacity: 0.85;
+    animation: tornado-float 3s linear infinite;
+    pointer-events: none;
+    z-index: 1500;
+  }
+  @keyframes tornado-float {
+    0% {transform: translate(0,0) rotate(0deg);}
+    25% {transform: translate(20px,-40px) rotate(15deg);}
+    50% {transform: translate(-15px,-80px) rotate(-15deg);}
+    75% {transform: translate(10px,-40px) rotate(10deg);}
+    100% {transform: translate(0,0) rotate(0deg);}
+  }
+  button#magic-btn {
+    margin-top: 2rem;
+    background-color: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 20px;
+    padding: 0.7em 1.5em;
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px #bbb;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+  button#magic-btn:hover {
+    background-color: var(--nav-link-hover);
+    color: var(--accent);
+  }
+  .wand {
+    font-size: 1.8rem;
+    user-select: none;
+  }
+  footer.disclaimer {
+    background-color: var(--nav-bg);
+    color: var(--nav-link);
+    text-align: center;
+    padding: 1.2rem 1rem 2rem;
+    font-size: 0.9rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    margin-top: 4rem;
+    font-family: var(--font-serif);
+  }
+  footer.disclaimer a {
+    color: var(--nav-link-hover);
+    text-decoration: underline;
+  }
+  @media (max-width: 700px) {
+    main {
+      padding: 1.5rem 1rem 3rem;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    nav a {
+      font-size: 1rem;
+      padding: 0.4em 1em;
+    }
+    button#magic-btn {
+      font-size: 1rem;
+      padding: 0.6em 1.2em;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+   About Me
+ </header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="interests.html">My Interests</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="education.html">Education</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<main>
+  <h2>About Me</h2>
+  <img src="type.jpg" alt="Vintage Typewriter" class="typewriter-img" style="display:block; margin: 2rem auto; max-width: 220px; cursor:pointer; filter: drop-shadow(2px 4px 5px #aaa);" />
+  <p>To read, please click on the typewriter image.</p>
+  <button id="magic-btn" aria-label="Cast magic spell">
+    Magic <span class="wand">🪄</span>
+  </button>
+</main>
+
+<div id="popup-bg" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1" style="display:none; position:fixed;top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.7); z-index:2000; align-items:center; justify-content:center; padding:1rem;">
+  <div id="popup-paper" style="background:#fefcf7; padding:2rem 3rem; border-radius:16px; box-shadow: 0 0 40px 8px #bbb; max-width:600px; font-family: 'Merriweather', serif; color:#444; font-size:1.1rem; line-height:1.5; position:relative;">
+    <button id="close-popup" aria-label="Close popup" style="position:absolute; top:10px; right:15px; font-size:2rem; color:#444; background:none; border:none; cursor:pointer;">&times;</button>
+    <h3 style="font-family: 'Special Elite', monospace; margin-top:0;">About Arif Hakim</h3>
+    <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;My name is MUHAMMAD NURARIF HAKIM BIN ABDULLAH, people just called me Arep. I am 19 Years Old almost twenty this July. I was born and raise in Alor Setar, Kedah. I have 4 siblings where I'm the youngest among the others. Currently, I'm a Library Informatics student at UiTM Kedah, and one step ahead until i finished my Diploma. To be honest, my target major is Law but sadly I can have it but i do believe that Allah planned is much better than what we expected. To be honest, I'm on my way to getout from my comfort zone and become a new person that is more independence and so on. I wish and looking forward for this. 
+    </p>
+    <p>
+      &nbsp;&nbsp;&nbsp;&nbsp;This site is my way to express myself, and why I choose The Tortured Poets Department (TTPD) concept is because this Album helps me during my mental breakdown. Simply said it kind of my therapy. TTPD is one of the latest album of Taylor Swift and it suddenly become my favourite all of my life. 
+Using this website you explore a little facts about myself, not by physical but through digital. ENJOY :>
+    </p>
+  </div>
+</div>
+
+<script>
+  // Paper tornado effect on page load
+  function createTornadoPaper() {
+    const paper = document.createElement('div');
+    paper.className = 'tornado-paper';
+    paper.style.left = `${Math.random() * window.innerWidth}px`;
+    paper.style.top = `${window.innerHeight + 30}px`;
+    paper.style.animationDuration = `${3 + Math.random() * 2}s`;
+    paper.style.animationDelay = `${Math.random() * 5}s`;
+    document.body.appendChild(paper);
+    setTimeout(() => paper.remove(), 7000);
+  }
+  for(let i=0; i<12; i++) {
+    setTimeout(createTornadoPaper, i * 500);
+  }
+
+  // Popup paper logic
+  const typewriterImg = document.querySelector('.typewriter-img');
+  const popupBg = document.getElementById('popup-bg');
+  const closePopup = document.getElementById('close-popup');
+
+  typewriterImg.addEventListener('click', () => {
+    popupBg.style.display = 'flex';
+    popupBg.setAttribute('aria-hidden', 'false');
+    closePopup.focus();
+  });
+
+  closePopup.addEventListener('click', () => {
+    popupBg.style.display = 'none';
+    popupBg.setAttribute('aria-hidden', 'true');
+    typewriterImg.focus();
+  });
+
+  popupBg.addEventListener('click', e => {
+    if(e.target === popupBg) {
+      popupBg.style.display = 'none';
+      popupBg.setAttribute('aria-hidden', 'true');
+      typewriterImg.focus();
+    }
+  });
+
+  // Paper floating effect on magic button click
+  document.getElementById('magic-btn').addEventListener('click', e => {
+    const rect = e.target.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    for (let i = 0; i < 10; i++) {
+      const paper = document.createElement('div');
+      paper.className = 'floating-paper';
+      paper.style.left = `${centerX + (Math.random() - 0.5) * 40}px`;
+      paper.style.top = `${centerY + (Math.random() - 0.5) * 20 + window.scrollY}px`;
+      paper.style.animationDelay = `${i * 0.1}s`;
+      document.body.appendChild(paper);
+      setTimeout(() => paper.remove(), 2200);
+    }
+  });
+</script>
+
+<style>
+  /* Tornado paper style */
+  .tornado-paper {
+    position: fixed;
+    width: 20px;
+    height: 28px;
+    background: linear-gradient(135deg, #fefcf7 0%, #dcd7ca 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 10px 3px #c9c4bbaa;
+    opacity: 0.85;
+    animation: tornado-float linear infinite;
+    pointer-events: none;
+    z-index: 1500;
+  }
+  @keyframes tornado-float {
+    0% {transform: translateY(0) rotate(0deg);}
+    25% {transform: translate(20px,-40px) rotate(15deg);}
+    50% {transform: translate(-15px,-80px) rotate(-15deg);}
+    75% {transform: translate(10px,-40px) rotate(10deg);}
+    100% {transform: translateY(0) rotate(0deg);}
+  }
+  /* Paper floating effect for magic button */
+  .floating-paper {
+    position: fixed;
+    pointer-events: none;
+    width: 14px;
+    height: 20px;
+    background: linear-gradient(135deg, #f9f6f0 0%, #d7cbbd 100%);
+    border-radius: 3px;
+    box-shadow: 0 0 8px 2px #c9b89a88;
+    opacity: 0.9;
+    animation: float-up 2s forwards;
+    transform-origin: center;
+    z-index: 9999;
+  }
+  @keyframes float-up {
+    0% {
+      opacity: 0.9;
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-120px) rotate(15deg);
+    }
+  }
+</style>
+</html>
+
